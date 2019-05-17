@@ -17,6 +17,7 @@ protocol YoutubeService: class {
     
     func obtainFirstVideoURL(completion: @escaping(ResponseCallback))
     func parseYoutubePlaylist(with playlist: String, completion: @escaping(ResponseCallback))
+    func obtainNextVideo(completion: @escaping (ResponseCallback)) -> Bool
     
 }
 
@@ -27,6 +28,8 @@ protocol YoutubeServiceOutput {
 class YoutubeServiceImp: YoutubeService {
     
     var serviceOutput: YoutubeServiceOutput?
+    var playlistVideoIDs: Array<String> = []
+    var playListItemIndex: Int = 0
     
     //MARK: - Initialization methods -
     init(with output: YoutubeServiceOutput?) {
@@ -39,25 +42,31 @@ class YoutubeServiceImp: YoutubeService {
             
             if let error = error {
                 self.serviceOutput?.showError(with: error)
+            } else if let videoItems = playlistItems as? [Item] {
+                self.playlistVideoIDs = videoItems.compactMap({$0.contentDetails?.videoID})
+                if let videoID = self.playlistVideoIDs.first {
+                    self.obtainVideoURL(with: videoID, completion: completion)
+                } else {
+                    completion(nil, ServerError.custom("Video link is absent"))
+                }
             } else {
-                let videoItems: [Item] = playlistItems as! [Item]
-                let itemIndex = Int.random(in: 0..<videoItems.count)
-                let videoItem = videoItems[itemIndex]
-                
-                let y = YoutubeDirectLinkExtractor()
-                
-                y.extractInfo(for: .id((videoItem.contentDetails?.videoID)!), success: { (info) in
-                    OperationQueue.main.addOperation({
-                        completion(info.highestQualityPlayableLink, nil)
-                    })
-                }, failure: { error in
-                    OperationQueue.main.addOperation({
-                        completion(nil, ServerError.custom(error.localizedDescription))
-                    })
-                })
+                completion(nil, ServerError.custom("API works unexpectable"))
             }
         }
     }
+    
+    func obtainNextVideo(completion: @escaping (ResponseCallback)) -> Bool {
+        playListItemIndex += 1
+        
+        if playListItemIndex < playlistVideoIDs.count {
+            obtainVideoURL(with: playlistVideoIDs[playListItemIndex], completion: completion)
+            return true
+        }
+        
+        return false
+    }
+    
+    //MARK: - Internal methods -
     
     func parseYoutubePlaylist(with playlist: String, completion: @escaping(ResponseCallback)) {
         
@@ -73,11 +82,39 @@ class YoutubeServiceImp: YoutubeService {
             case .success(let value):
                 let json = JSON(value).rawValue as! Dictionary<String, Any>
                 let playlist = PlaylistModel.init(json: json)
-                completion(playlist?.items, nil)
+                
+                if let playlistItems = playlist?.items {
+                    completion(playlistItems, nil)
+                } else {
+                    completion(nil, ServerError.custom("Access Not Configured. YouTube Data API has not been used in project 642554659286 before or it is disabled. Enable it by visiting"))
+                }
+                
             case .failure(let error):
                 let displayError = ServerError.custom(error.localizedDescription)
                 completion(nil, displayError)
             }
         }
+    }
+    
+    func obtainVideoURL(with videoID: String, completion: @escaping ResponseCallback) {
+        
+        let videoURL = URL(string: String(format: "https://www.youtube.com/watch?v=%@", videoID))
+        
+        let infoURL = NSURL(string:"https://www.youtube.com/get_video_info?video_id=\(videoID)")
+        let request = NSMutableURLRequest(url: infoURL! as URL)
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if let error = error {
+                print(error)
+            } else if let data = data, let result = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String? {
+                // Pattern 1
+                // Get streaming map directly
+                let maps = FormatStreamMapFromString(result)
+                if let map = maps.first {
+                    print(map.url)
+                }
+            }
+        })
+        task.resume()
     }
 }
