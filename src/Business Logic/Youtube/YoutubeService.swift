@@ -98,8 +98,6 @@ class YoutubeServiceImp: YoutubeService {
     
     func obtainVideoURL(with videoID: String, completion: @escaping ResponseCallback) {
         
-        let videoURL = URL(string: String(format: "https://www.youtube.com/watch?v=%@", videoID))
-        
         let infoURL = NSURL(string:"https://www.youtube.com/get_video_info?video_id=\(videoID)")
         let request = NSMutableURLRequest(url: infoURL! as URL)
         let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -109,10 +107,7 @@ class YoutubeServiceImp: YoutubeService {
             } else if let data = data, let result = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String? {
                 // Pattern 1
                 // Get streaming map directly
-                let maps = FormatStreamMapFromString(result)
-                if let map = maps.first {
-                    print(map.url)
-                }
+                print(result)
             }
         })
         task.resume()
