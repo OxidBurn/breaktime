@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import AVFoundation
 import MediaPlayer
+import AVKit
 
 class ViewController: UIViewController{
     
@@ -59,7 +60,7 @@ class ViewController: UIViewController{
         updateVisibleStateOfCompoments(with: true)
         videoPlayer.player?.play()
         self.playlistEnded = false
-        videoTimer = Timer.scheduledTimer(withTimeInterval: timeValue, repeats: false, block: { timer in
+        videoTimer = Timer.scheduledTimer(withTimeInterval: timeValue*60, repeats: false, block: { timer in
             timer.invalidate()
             self.playlistEnded = true
             self.stopPlayingVideo()
@@ -89,7 +90,9 @@ class ViewController: UIViewController{
     func startPlay(with link: URL?) {
         guard let linkURL = link else { return }
         
-        let player = AVPlayer(url: linkURL)
+        let asset = AVURLAsset(url: linkURL)
+        let playerItem = AVPlayerItem(asset: asset)
+        let player = AVPlayer(playerItem: playerItem)
         videoPlayer.player = player
         updateVisibleStateOfCompoments(with: false)
     }

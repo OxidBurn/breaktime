@@ -97,19 +97,31 @@ class YoutubeServiceImp: YoutubeService {
     }
     
     func obtainVideoURL(with videoID: String, completion: @escaping ResponseCallback) {
+        let youtubeExtractor = YoutubeDirectLinkExtractor()
+
+        youtubeExtractor.extractInfo(for: .id(videoID), success: { info in
+            OperationQueue.main.addOperation({
+                if let videoLink = info.highestQualityPlayableLink {
+                    completion(URL(string: videoLink), nil)
+                } else if let videoLink = info.lowestQualityPlayableLink {
+                    completion(URL(string: videoLink), nil)
+                } else {
+                    self.processBadLinkCase(completion: completion)
+                }
+            })
+        }) { error in
+            self.processBadLinkCase(completion: completion)
+            
+        }
+    }
+    
+    func processBadLinkCase(completion: @escaping ResponseCallback) {
+        let existVideos = self.obtainNextVideo(completion: completion)
         
-        let infoURL = NSURL(string:"https://www.youtube.com/get_video_info?video_id=\(videoID)")
-        let request = NSMutableURLRequest(url: infoURL! as URL)
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        let task = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if let error = error {
-                print(error)
-            } else if let data = data, let result = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String? {
-                // Pattern 1
-                // Get streaming map directly
-                print(result)
+        if existVideos == false {
+            OperationQueue.main.addOperation {
+                completion(nil, ServerError.custom("Absent appropriate video links"))
             }
-        })
-        task.resume()
+        }
     }
 }
