@@ -38,10 +38,10 @@ class VideoPlayerView: UIView {
     
     override func awakeFromNib() {
         // Register for notification
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(playerItemDidReachEnd),
-//                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-//                                               object: nil) // Add observer
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(playerItemDidReachEnd),
+                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                                               object: nil) // Add observer
     }
     
     

@@ -10,14 +10,16 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import YoutubeDirectLinkExtractor
+import AVKit
+import AVFoundation
 
 typealias ResponseCallback = (_ responseData : Any?, _ responseError: ServerError?) -> ()
 
 protocol YoutubeService: class {
     
-    func obtainFirstVideoURL(completion: @escaping(ResponseCallback))
+    func obtainPlaylist(completion: @escaping(ResponseCallback))
     func parseYoutubePlaylist(with playlist: String, completion: @escaping(ResponseCallback))
-    func obtainNextVideo(completion: @escaping (ResponseCallback)) -> Bool
+    func obtainNextVideo(completion: @escaping (ResponseCallback))
     
 }
 
@@ -30,6 +32,7 @@ class YoutubeServiceImp: YoutubeService {
     var serviceOutput: YoutubeServiceOutput?
     var playlistVideoIDs: Array<String> = []
     var playListItemIndex: Int = 0
+    var playlistOfAvailableVideos: Array<String> = []
     
     //MARK: - Initialization methods -
     init(with output: YoutubeServiceOutput?) {
@@ -37,33 +40,25 @@ class YoutubeServiceImp: YoutubeService {
     }
     
     //MARK: - Input protocol methods -
-    func obtainFirstVideoURL(completion: @escaping (ResponseCallback)) {
+    func obtainPlaylist(completion: @escaping (ResponseCallback)) {
         parseYoutubePlaylist(with: Constants.kPlaylistID) { (playlistItems, error) in
             
             if let error = error {
                 self.serviceOutput?.showError(with: error)
             } else if let videoItems = playlistItems as? [Item] {
-                self.playlistVideoIDs = videoItems.compactMap({$0.contentDetails?.videoID})
-                if let videoID = self.playlistVideoIDs.first {
-                    self.obtainVideoURL(with: videoID, completion: completion)
-                } else {
-                    completion(nil, ServerError.custom("Video link is absent"))
-                }
+                self.playlistVideoIDs = videoItems.compactMap({$0.contentDetails.videoID})
+                self.obtainAllAvailableVideos(with: completion)
             } else {
                 completion(nil, ServerError.custom("API works unexpectable"))
             }
         }
     }
     
-    func obtainNextVideo(completion: @escaping (ResponseCallback)) -> Bool {
+    func obtainNextVideo(completion: @escaping (ResponseCallback)) {
+        
+        obtainVideoURL(with: playlistVideoIDs[playListItemIndex], completion: completion)
+        
         playListItemIndex += 1
-        
-        if playListItemIndex < playlistVideoIDs.count {
-            obtainVideoURL(with: playlistVideoIDs[playListItemIndex], completion: completion)
-            return true
-        }
-        
-        return false
     }
     
     //MARK: - Internal methods -
@@ -76,22 +71,35 @@ class YoutubeServiceImp: YoutubeService {
         }
         
         let url = URL(string: "https://www.googleapis.com/youtube/v3/playlistItems")
-        Alamofire.request(url!, method: .get, parameters: ["part" : "contentDetails", "playlistId" : Constants.kPlaylistID, "key" : Constants.kYoutubeAPIKey], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
-            
+        Alamofire.request(url!, method: .get, parameters: ["part" : "contentDetails", "maxResults" : 10, "playlistId" : playlist, "key" : Constants.kYoutubeAPIKey], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+
             switch response.result {
-            case .success(let value):
-                let json = JSON(value).rawValue as! Dictionary<String, Any>
-                let playlist = PlaylistModel.init(json: json)
-                
+            case .success(_):
+                let playlist = PlaylistModel.init(data: response.data!)
+
                 if let playlistItems = playlist?.items {
                     completion(playlistItems, nil)
                 } else {
                     completion(nil, ServerError.custom("Access Not Configured. YouTube Data API has not been used in project 642554659286 before or it is disabled. Enable it by visiting"))
                 }
-                
+
             case .failure(let error):
                 let displayError = ServerError.custom(error.localizedDescription)
                 completion(nil, displayError)
+            }
+        }
+    }
+    
+    func obtainAllAvailableVideos(with completion: @escaping ResponseCallback) {
+        obtainNextVideo { (videoURL, error) in
+            if let url = videoURL as? String {
+                self.playlistOfAvailableVideos.append(url)
+            }
+            
+            if ( self.playListItemIndex < self.playlistVideoIDs.count ) {
+                self.obtainAllAvailableVideos(with: completion)
+            } else {
+                self.buildVideoPlaylist(with: completion)
             }
         }
     }
@@ -102,26 +110,36 @@ class YoutubeServiceImp: YoutubeService {
         youtubeExtractor.extractInfo(for: .id(videoID), success: { info in
             OperationQueue.main.addOperation({
                 if let videoLink = info.highestQualityPlayableLink {
-                    completion(URL(string: videoLink), nil)
+                    completion(videoLink, nil)
                 } else if let videoLink = info.lowestQualityPlayableLink {
-                    completion(URL(string: videoLink), nil)
+                    completion(videoLink, nil)
                 } else {
-                    self.processBadLinkCase(completion: completion)
+                    completion(nil, ServerError.custom("Bad video URL"))
                 }
             })
         }) { error in
-            self.processBadLinkCase(completion: completion)
-            
+            completion(nil, ServerError.custom(error.localizedDescription))
         }
     }
     
-    func processBadLinkCase(completion: @escaping ResponseCallback) {
-        let existVideos = self.obtainNextVideo(completion: completion)
+    func buildVideoPlaylist(with completion: @escaping ResponseCallback) {
         
-        if existVideos == false {
-            OperationQueue.main.addOperation {
-                completion(nil, ServerError.custom("Absent appropriate video links"))
+        var videoItem: Array<AVPlayerItem> = []
+        
+        for videoURL in playlistOfAvailableVideos {
+            if let url = URL(string: videoURL) {
+                let asset = AVURLAsset(url: url)
+                let item = AVPlayerItem(asset: asset)
+                videoItem.append(item)
             }
+        }
+        
+        if ( videoItem.count > 0 )
+        {
+            let videoPlaylist = AVQueuePlayer(items: videoItem)
+            completion(videoPlaylist, nil)
+        } else {
+            completion(nil, ServerError.custom("Playlist doesn't contain playable video"))
         }
     }
 }

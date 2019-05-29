@@ -26,6 +26,8 @@ class ViewController: UIViewController{
     let volumeView = MPVolumeView()
     var videoTimer: Timer?
     var playlistEnded: Bool = false
+    var countOfItems: Int = 0
+    var currentItem: Int = 0
     
     
     private lazy var youtubeService: YoutubeService = {
@@ -82,25 +84,25 @@ class ViewController: UIViewController{
     func loadVideoFromPlaylist() {
         SVProgressHUD.show(withStatus: "Loading playlist...")
         
-        youtubeService.obtainFirstVideoURL { (videoURL, error) in
-            self.processingResponse(with: videoURL as? URL, error: error)
+        youtubeService.obtainPlaylist { (player, error) in
+            SVProgressHUD.dismiss()
+            guard let p = player else { self.showError(with: error!); return }
+            OperationQueue.main.addOperation({
+                self.startPlay(with: p as! AVQueuePlayer)
+            })
         }
     }
     
-    func startPlay(with link: URL?) {
-        guard let linkURL = link else { return }
-        
-        let asset = AVURLAsset(url: linkURL)
-        let playerItem = AVPlayerItem(asset: asset)
-        let player = AVPlayer(playerItem: playerItem)
+    func startPlay(with player: AVQueuePlayer) {
+        countOfItems = player.items().count
         videoPlayer.player = player
         updateVisibleStateOfCompoments(with: false)
     }
     
     func updateVisibleStateOfCompoments(with state: Bool) {
-        playBtn.isHidden    = state
-        timeSlider.isHidden = state
-        timeLabel.isHidden  = state
+        playBtn.isHidden            = state
+        timeSlider.isHidden         = state
+        timeLabel.isHidden          = state
         maxTimerValueLabel.isHidden = state
         minTimerValueLabel.isHidden = state
     }
@@ -111,29 +113,8 @@ class ViewController: UIViewController{
         UIView.animate(withDuration: 1.0) {
             self.videoPlayer.alpha = 0.0
             self.videoPlayer.player?.volume = 0.0
+            self.videoPlayer.player?.seek(to: CMTime.zero)
             self.updateVisibleStateOfCompoments(with: false)
-        }
-    }
-    
-    func processingResponse(with videoURL: URL?, error: ServerError?) {
-        if let err = error {
-            self.showError(with: err)
-        } else if let videoLink = videoURL {
-            self.startPlay(with: videoLink)
-        } else {
-            obtainNextVideo()
-        }
-        
-        SVProgressHUD.dismiss()
-    }
-    
-    func obtainNextVideo() {
-        let isExistNewVideo = youtubeService.obtainNextVideo { (videoURL, error) in
-            self.processingResponse(with: videoURL as? URL, error: error)
-        }
-        
-        if isExistNewVideo == false {
-            stopPlayingVideo()
         }
     }
 }
@@ -149,8 +130,10 @@ extension ViewController: YoutubeServiceOutput, ErrorPresentable {
 
 extension ViewController: VideoPlayerViewOutput {
     func videoPlayDidFinished() {
-        if self.playlistEnded == false {
-            obtainNextVideo()
+        currentItem += 1
+        
+        if currentItem == countOfItems {
+            stopPlayingVideo()
         }
     }
 }

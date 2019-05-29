@@ -16,11 +16,14 @@ class SettingsServiceImp: SettingsService {
     
     //MARK: - Input protocol methods -
     func setupStartupDefaults() {
-        googleConfiguration()
+        heapConfiguration()
     }
     
     //MARK: - Internal methods -
-    func googleConfiguration() {
-        
+    func heapConfiguration() {
+        Heap.setAppId(Constants.kHeapDev);
+        #if DEBUG
+            Heap.enableVisualizer();
+        #endif
     }
 }

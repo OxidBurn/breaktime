@@ -12,6 +12,6 @@ target 'BreakTime' do
   pod 'SVProgressHUD'
   pod 'SwiftyJSON'
   pod 'YoutubeDirectLinkExtractor'
-  pod 'YoutubeVideoLinkProcessor'
+  pod 'Heap'
 
 end
