@@ -95,6 +95,10 @@
                                     <action selector="updateTimeDuration:" destination="BYZ-38-t0r" eventType="valueChanged" id="6vo-do-YyF"/>
                                 </connections>
                             </slider>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbl-GD-f5i" customClass="TimerView" customModule="BreakTime" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="760"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -102,18 +106,22 @@
                             <constraint firstItem="qgq-7b-sB8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1zv-CJ-xOL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qgq-7b-sB8" secondAttribute="bottom" constant="30" id="5M3-Wa-OHi"/>
                             <constraint firstItem="Z3X-2H-7TI" firstAttribute="leading" secondItem="1iz-Nl-TpQ" secondAttribute="trailing" id="68p-cL-Gb7"/>
+                            <constraint firstItem="gbl-GD-f5i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="96m-So-VJj"/>
                             <constraint firstItem="rdg-Xq-371" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BGT-1p-xdf"/>
                             <constraint firstItem="2Rm-iP-sy6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CON-hG-dci"/>
                             <constraint firstItem="Smo-9Q-T5N" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FtW-Ay-SSy"/>
                             <constraint firstItem="2Rm-iP-sy6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HBR-OU-pnY"/>
                             <constraint firstItem="1iz-Nl-TpQ" firstAttribute="leading" secondItem="qgq-7b-sB8" secondAttribute="trailing" id="JSh-8W-H1M"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gbl-GD-f5i" secondAttribute="trailing" id="N4S-A7-2j6"/>
                             <constraint firstItem="rdg-Xq-371" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NVb-AR-CbE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z3X-2H-7TI" secondAttribute="bottom" constant="30" id="Slz-Zs-5Ht"/>
+                            <constraint firstItem="1iz-Nl-TpQ" firstAttribute="top" secondItem="gbl-GD-f5i" secondAttribute="bottom" id="WFh-Mx-6Oy"/>
                             <constraint firstItem="nHC-yD-RST" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="WPZ-ao-Ewp"/>
                             <constraint firstItem="qgq-7b-sB8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZzJ-1l-SVj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1iz-Nl-TpQ" secondAttribute="bottom" constant="28" id="aZo-EV-TFF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Z3X-2H-7TI" secondAttribute="trailing" id="gC6-wq-54Z"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Smo-9Q-T5N" secondAttribute="bottom" id="jJb-4H-TGM"/>
+                            <constraint firstItem="gbl-GD-f5i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ljg-HJ-Ep2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rdg-Xq-371" secondAttribute="bottom" id="mxb-uM-neg"/>
                             <constraint firstItem="nHC-yD-RST" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xWv-1C-jGI"/>
                         </constraints>
@@ -125,6 +133,7 @@
                         <outlet property="playBtn" destination="nHC-yD-RST" id="dzW-uG-uKA"/>
                         <outlet property="timeLabel" destination="Smo-9Q-T5N" id="1Pu-Sv-wdz"/>
                         <outlet property="timeSlider" destination="1iz-Nl-TpQ" id="7tV-RG-kVN"/>
+                        <outlet property="timerView" destination="gbl-GD-f5i" id="DlG-TQ-rhi"/>
                         <outlet property="tryBtn" destination="2Rm-iP-sy6" id="YlZ-MT-tC9"/>
                         <outlet property="videoPlayer" destination="rdg-Xq-371" id="r4A-rW-G2Z"/>
                     </connections>

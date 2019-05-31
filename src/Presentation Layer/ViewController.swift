@@ -21,6 +21,7 @@ class ViewController: UIViewController{
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var maxTimerValueLabel: UILabel!
     @IBOutlet weak var minTimerValueLabel: UILabel!
+    @IBOutlet weak var timerView: TimerView!
     
     var timeValue: Double = 5
     let volumeView = MPVolumeView()
@@ -39,7 +40,9 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.videoPlayer.output = self
+        videoPlayer.output = self
+        timerView.output   = self
+        
         loadVideoFromPlaylist()
     }
     
@@ -65,7 +68,7 @@ class ViewController: UIViewController{
         videoTimer = Timer.scheduledTimer(withTimeInterval: timeValue*60, repeats: false, block: { timer in
             timer.invalidate()
             self.playlistEnded = true
-            self.stopPlayingVideo()
+            self.displayCountdownTimer()
         })
     }
     
@@ -109,13 +112,20 @@ class ViewController: UIViewController{
     
     func stopPlayingVideo() {
         videoTimer?.invalidate()
-        videoPlayer.player?.pause()
-        UIView.animate(withDuration: 1.0) {
-            self.videoPlayer.alpha = 0.0
-            self.videoPlayer.player?.volume = 0.0
+        UIView.animate(withDuration: 10.0,
+                       animations: {
+                        self.videoPlayer.alpha = 0.0
+                        self.videoPlayer.player?.volume = 0.0
+        }) { (finished) in
+            self.videoPlayer.player?.pause()
             self.videoPlayer.player?.seek(to: CMTime.zero)
             self.updateVisibleStateOfCompoments(with: false)
         }
+    }
+    
+    func displayCountdownTimer() {
+        timerView.isHidden = false
+        timerView.startTimer()
     }
 }
 
@@ -133,7 +143,14 @@ extension ViewController: VideoPlayerViewOutput {
         currentItem += 1
         
         if currentItem == countOfItems {
-            stopPlayingVideo()
+            displayCountdownTimer()
         }
+    }
+}
+
+extension ViewController: TimerViewOutput {
+    func didFinishedTimer() {
+        timerView.isHidden = true
+        stopPlayingVideo()
     }
 }

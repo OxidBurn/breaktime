@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimerView" customModule="BreakTime" customModuleProvider="target">
+            <connections>
+                <outlet property="timeLabel" destination="pqb-1c-oDn" id="O24-Gr-4KR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="countDowniPhone" translatesAutoresizingMaskIntoConstraints="NO" id="3fC-JE-Tkr">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <variation key="heightClass=compact-widthClass=compact" image="countDowniPhoneLandscape"/>
+                    <variation key="heightClass=compact-widthClass=regular" image="countDowniPhoneLandscape"/>
+                    <variation key="heightClass=regular-widthClass=regular" image="countDowniPad"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqb-1c-oDn">
+                    <rect key="frame" x="125.5" y="368.5" width="163.5" height="159.5"/>
+                    <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="130"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="3fC-JE-Tkr" secondAttribute="bottom" id="J27-Gp-zHT"/>
+                <constraint firstItem="3fC-JE-Tkr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="P7V-dm-3G7"/>
+                <constraint firstItem="3fC-JE-Tkr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e34-X9-Txj"/>
+                <constraint firstItem="pqb-1c-oDn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gqV-WL-kln"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3fC-JE-Tkr" secondAttribute="trailing" id="hrN-ta-Mbu"/>
+                <constraint firstItem="pqb-1c-oDn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hzv-0P-OIE"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-130.43478260869566" y="76.339285714285708"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="countDowniPad" width="1024" height="1366"/>
+        <image name="countDowniPhone" width="375" height="812"/>
+        <image name="countDowniPhoneLandscape" width="812" height="375"/>
+    </resources>
+</document>

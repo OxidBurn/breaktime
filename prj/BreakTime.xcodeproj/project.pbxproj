@@ -10,6 +10,8 @@
 		59244B53228B536C0000594E /* PlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59244B52228B536C0000594E /* PlaylistModel.swift */; };
 		59244B55228B53E70000594E /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59244B54228B53E70000594E /* ServerError.swift */; };
 		59244B58228B54170000594E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59244B57228B54170000594E /* Reachability.swift */; };
+		5943CCF3229FEF8900E02FB1 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943CCF2229FEF8900E02FB1 /* TimerView.swift */; };
+		5943CCF5229FEF9900E02FB1 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943CCF4229FEF9900E02FB1 /* TimerView.xib */; };
 		5960C2BA228BF34A0021AA39 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5960C2B9228BF34A0021AA39 /* AVFoundation.framework */; };
 		5960C2BD228BF4FD0021AA39 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5960C2BC228BF4FD0021AA39 /* VideoPlayerView.swift */; };
 		5960C2BF228BFC2C0021AA39 /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5960C2BE228BFC2C0021AA39 /* ErrorPresentable.swift */; };
@@ -30,6 +32,8 @@
 		59244B52228B536C0000594E /* PlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistModel.swift; sourceTree = "<group>"; };
 		59244B54228B53E70000594E /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		59244B57228B54170000594E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		5943CCF2229FEF8900E02FB1 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		5943CCF4229FEF9900E02FB1 /* TimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
 		5955CD78229D32AD002D22D6 /* -Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		5960C2B9228BF34A0021AA39 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5960C2BC228BF4FD0021AA39 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
@@ -81,9 +85,26 @@
 			path = Server;
 			sourceTree = "<group>";
 		};
+		5943CCF0229FEE6700E02FB1 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		5943CCF1229FEF4B00E02FB1 /* TimerView */ = {
+			isa = PBXGroup;
+			children = (
+				5943CCF2229FEF8900E02FB1 /* TimerView.swift */,
+				5943CCF4229FEF9900E02FB1 /* TimerView.xib */,
+			);
+			path = TimerView;
+			sourceTree = "<group>";
+		};
 		5960C2BB228BF4E20021AA39 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5943CCF1229FEF4B00E02FB1 /* TimerView */,
 				5960C2BE228BFC2C0021AA39 /* ErrorPresentable.swift */,
 				5960C2BC228BF4FD0021AA39 /* VideoPlayerView.swift */,
 			);
@@ -181,6 +202,7 @@
 		596D3D5122836A5D00A5A907 /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
+				5943CCF0229FEE6700E02FB1 /* Timer */,
 				59244B56228B54170000594E /* Server */,
 				596D3D562284B17100A5A907 /* AppSettings */,
 				596D3D5222843CF600A5A907 /* Youtube */,
@@ -309,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5943CCF5229FEF9900E02FB1 /* TimerView.xib in Resources */,
 				596D3D48228369F700A5A907 /* LaunchScreen.storyboard in Resources */,
 				59719EF4228582390045D78E /* GoogleService-Info.plist in Resources */,
 				596D3D4A228369F700A5A907 /* Assets.xcassets in Resources */,
@@ -371,6 +394,7 @@
 				596D3D5022836A4000A5A907 /* ViewController.swift in Sources */,
 				596D3D5422843D0700A5A907 /* YoutubeService.swift in Sources */,
 				5960C2BD228BF4FD0021AA39 /* VideoPlayerView.swift in Sources */,
+				5943CCF3229FEF8900E02FB1 /* TimerView.swift in Sources */,
 				596D3D4F22836A4000A5A907 /* AppDelegate.swift in Sources */,
 				59244B58228B54170000594E /* Reachability.swift in Sources */,
 				5960C2BF228BFC2C0021AA39 /* ErrorPresentable.swift in Sources */,
