@@ -96,6 +96,10 @@ class VideoPlayerControls: UIView {
         playTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] (timer) in
             self?.leftTimeValue -= 1
             self?.updateLeftTimeLabel()
+            
+            if self?.leftTimeValue == 0 {
+                timer.invalidate()
+            }
         }
     }
     
