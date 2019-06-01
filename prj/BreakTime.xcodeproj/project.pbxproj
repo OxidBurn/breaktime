@@ -24,6 +24,9 @@
 		596D3D582284B18D00A5A907 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596D3D572284B18D00A5A907 /* SettingsService.swift */; };
 		596D3D5B2284B1FE00A5A907 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596D3D5A2284B1FE00A5A907 /* Constants.swift */; };
 		59719EF4228582390045D78E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59719EF3228582390045D78E /* GoogleService-Info.plist */; };
+		598C006A22A266A2007BD951 /* AppStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C006922A266A2007BD951 /* AppStateService.swift */; };
+		598C006D22A26950007BD951 /* VideoPlayerControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C006C22A26950007BD951 /* VideoPlayerControls.swift */; };
+		598C006F22A2695B007BD951 /* VideoPlayerControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 598C006E22A2695B007BD951 /* VideoPlayerControls.xib */; };
 		8902324E9925E0D7AE291F81 /* Pods_BreakTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2FD344154ADF2E48C5AF3F /* Pods_BreakTime.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +54,9 @@
 		596D3D5F2284C58400A5A907 /* YoutubeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YoutubeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		596D3D612284C5A100A5A907 /* YoutubeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YoutubeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59719EF3228582390045D78E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		598C006922A266A2007BD951 /* AppStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateService.swift; sourceTree = "<group>"; };
+		598C006C22A26950007BD951 /* VideoPlayerControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerControls.swift; sourceTree = "<group>"; };
+		598C006E22A2695B007BD951 /* VideoPlayerControls.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerControls.xib; sourceTree = "<group>"; };
 		D9BEA0A0E405F3BBF9205C8C /* Pods-BreakTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakTime.release.xcconfig"; path = "Target Support Files/Pods-BreakTime/Pods-BreakTime.release.xcconfig"; sourceTree = "<group>"; };
 		FB2FD344154ADF2E48C5AF3F /* Pods_BreakTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -104,6 +110,7 @@
 		5960C2BB228BF4E20021AA39 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				598C006B22A2693A007BD951 /* PlayerControls */,
 				5943CCF1229FEF4B00E02FB1 /* TimerView */,
 				5960C2BE228BFC2C0021AA39 /* ErrorPresentable.swift */,
 				5960C2BC228BF4FD0021AA39 /* VideoPlayerView.swift */,
@@ -202,6 +209,7 @@
 		596D3D5122836A5D00A5A907 /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
+				598C006822A26692007BD951 /* AppState */,
 				5943CCF0229FEE6700E02FB1 /* Timer */,
 				59244B56228B54170000594E /* Server */,
 				596D3D562284B17100A5A907 /* AppSettings */,
@@ -240,6 +248,23 @@
 				59719EF3228582390045D78E /* GoogleService-Info.plist */,
 			);
 			path = Google;
+			sourceTree = "<group>";
+		};
+		598C006822A26692007BD951 /* AppState */ = {
+			isa = PBXGroup;
+			children = (
+				598C006922A266A2007BD951 /* AppStateService.swift */,
+			);
+			path = AppState;
+			sourceTree = "<group>";
+		};
+		598C006B22A2693A007BD951 /* PlayerControls */ = {
+			isa = PBXGroup;
+			children = (
+				598C006C22A26950007BD951 /* VideoPlayerControls.swift */,
+				598C006E22A2695B007BD951 /* VideoPlayerControls.xib */,
+			);
+			path = PlayerControls;
 			sourceTree = "<group>";
 		};
 		59CAF3EB2284C5C300D650B8 /* Libraries */ = {
@@ -331,6 +356,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				598C006F22A2695B007BD951 /* VideoPlayerControls.xib in Resources */,
 				5943CCF5229FEF9900E02FB1 /* TimerView.xib in Resources */,
 				596D3D48228369F700A5A907 /* LaunchScreen.storyboard in Resources */,
 				59719EF4228582390045D78E /* GoogleService-Info.plist in Resources */,
@@ -389,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				596D3D5B2284B1FE00A5A907 /* Constants.swift in Sources */,
+				598C006D22A26950007BD951 /* VideoPlayerControls.swift in Sources */,
 				59244B53228B536C0000594E /* PlaylistModel.swift in Sources */,
 				596D3D582284B18D00A5A907 /* SettingsService.swift in Sources */,
 				596D3D5022836A4000A5A907 /* ViewController.swift in Sources */,
@@ -399,6 +426,7 @@
 				59244B58228B54170000594E /* Reachability.swift in Sources */,
 				5960C2BF228BFC2C0021AA39 /* ErrorPresentable.swift in Sources */,
 				59244B55228B53E70000594E /* ServerError.swift in Sources */,
+				598C006A22A266A2007BD951 /* AppStateService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

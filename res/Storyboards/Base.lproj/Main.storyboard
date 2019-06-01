@@ -22,119 +22,35 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button hidden="YES" opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHC-yD-RST">
-                                <rect key="frame" x="157" y="398" width="100" height="100"/>
-                                <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="0.69442958047945202" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="play_btn_icon"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="didClickPlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ge7-OO-ZDY"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Rm-iP-sy6">
-                                <rect key="frame" x="162.5" y="430" width="89" height="36"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Try Again">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="didClickTryAgain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KGI-k9-5Me"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgq-7b-sB8">
-                                <rect key="frame" x="0.0" y="808" width="26" height="24"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.49636130140000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="26" id="JC8-j0-zdc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3X-2H-7TI">
-                                <rect key="frame" x="394" y="808" width="20" height="24"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.49636130140000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smo-9Q-T5N">
-                                <rect key="frame" x="176.5" y="829" width="61.5" height="33"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.49636130136986301" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="1iz-Nl-TpQ">
-                                <rect key="frame" x="24" y="804" width="372" height="31"/>
-                                <color key="minimumTrackTintColor" red="0.38431372549999998" green="0.62745098040000002" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="maximumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="thumbTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="updateTimeDuration:" destination="BYZ-38-t0r" eventType="valueChanged" id="6vo-do-YyF"/>
-                                </connections>
-                            </slider>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbl-GD-f5i" customClass="TimerView" customModule="BreakTime" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="760"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0l3-pQ-sX2" customClass="VideoPlayerControls" customModule="BreakTime" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rdg-Xq-371" secondAttribute="trailing" id="00L-wl-Kb9"/>
-                            <constraint firstItem="qgq-7b-sB8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1zv-CJ-xOL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qgq-7b-sB8" secondAttribute="bottom" constant="30" id="5M3-Wa-OHi"/>
-                            <constraint firstItem="Z3X-2H-7TI" firstAttribute="leading" secondItem="1iz-Nl-TpQ" secondAttribute="trailing" id="68p-cL-Gb7"/>
                             <constraint firstItem="gbl-GD-f5i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="96m-So-VJj"/>
                             <constraint firstItem="rdg-Xq-371" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BGT-1p-xdf"/>
-                            <constraint firstItem="2Rm-iP-sy6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CON-hG-dci"/>
-                            <constraint firstItem="Smo-9Q-T5N" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FtW-Ay-SSy"/>
-                            <constraint firstItem="2Rm-iP-sy6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HBR-OU-pnY"/>
-                            <constraint firstItem="1iz-Nl-TpQ" firstAttribute="leading" secondItem="qgq-7b-sB8" secondAttribute="trailing" id="JSh-8W-H1M"/>
+                            <constraint firstItem="0l3-pQ-sX2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KE2-DT-h21"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gbl-GD-f5i" secondAttribute="trailing" id="N4S-A7-2j6"/>
                             <constraint firstItem="rdg-Xq-371" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NVb-AR-CbE"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z3X-2H-7TI" secondAttribute="bottom" constant="30" id="Slz-Zs-5Ht"/>
-                            <constraint firstItem="1iz-Nl-TpQ" firstAttribute="top" secondItem="gbl-GD-f5i" secondAttribute="bottom" id="WFh-Mx-6Oy"/>
-                            <constraint firstItem="nHC-yD-RST" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="WPZ-ao-Ewp"/>
-                            <constraint firstItem="qgq-7b-sB8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZzJ-1l-SVj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1iz-Nl-TpQ" secondAttribute="bottom" constant="28" id="aZo-EV-TFF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Z3X-2H-7TI" secondAttribute="trailing" id="gC6-wq-54Z"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Smo-9Q-T5N" secondAttribute="bottom" id="jJb-4H-TGM"/>
+                            <constraint firstItem="0l3-pQ-sX2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bZo-IL-qFO"/>
+                            <constraint firstItem="0l3-pQ-sX2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="cgz-lI-1ig"/>
+                            <constraint firstItem="gbl-GD-f5i" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ckA-td-crU"/>
                             <constraint firstItem="gbl-GD-f5i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ljg-HJ-Ep2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rdg-Xq-371" secondAttribute="bottom" id="mxb-uM-neg"/>
-                            <constraint firstItem="nHC-yD-RST" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xWv-1C-jGI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0l3-pQ-sX2" secondAttribute="bottom" id="xYb-SD-XxF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="maxTimerValueLabel" destination="Z3X-2H-7TI" id="pfV-nc-X6D"/>
-                        <outlet property="minTimerValueLabel" destination="qgq-7b-sB8" id="uKC-WE-arq"/>
-                        <outlet property="playBtn" destination="nHC-yD-RST" id="dzW-uG-uKA"/>
-                        <outlet property="timeLabel" destination="Smo-9Q-T5N" id="1Pu-Sv-wdz"/>
-                        <outlet property="timeSlider" destination="1iz-Nl-TpQ" id="7tV-RG-kVN"/>
+                        <outlet property="playerControls" destination="0l3-pQ-sX2" id="CUZ-1e-3SE"/>
                         <outlet property="timerView" destination="gbl-GD-f5i" id="DlG-TQ-rhi"/>
-                        <outlet property="tryBtn" destination="2Rm-iP-sy6" id="YlZ-MT-tC9"/>
                         <outlet property="videoPlayer" destination="rdg-Xq-371" id="r4A-rW-G2Z"/>
                     </connections>
                 </viewController>
@@ -143,7 +59,4 @@
             <point key="canvasLocation" x="47.826086956521742" y="21.428571428571427"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="play_btn_icon" width="100" height="100"/>
-    </resources>
 </document>
