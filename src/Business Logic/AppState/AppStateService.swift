@@ -8,7 +8,9 @@
 
 import Foundation
 
-protocol AppStateService: class {}
+protocol AppStateService: class {
+    func startMonitoring()
+}
 
 protocol AppStateServiceOutput {
     func didEnterToBackground()
@@ -22,11 +24,10 @@ class AppStateServiceImp: AppStateService {
     //MARK: - Initialization -
     init(with out: AppStateServiceOutput) {
         output = out
-        defaultSetup()
     }
     
     //MARK: - Internal methods -
-    func defaultSetup() {
+    func startMonitoring() {
         NotificationCenter.default.addObserver(self, selector: #selector(appEnteredToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     

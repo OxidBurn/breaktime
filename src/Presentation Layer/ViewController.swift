@@ -42,6 +42,7 @@ class ViewController: UIViewController{
         timerView.output      = self
         playerControls.output = self
         
+        appState.startMonitoring()
         loadVideoFromPlaylist()
     }
     

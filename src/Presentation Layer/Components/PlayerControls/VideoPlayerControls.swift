@@ -81,8 +81,14 @@ class VideoPlayerControls: UIView {
     }
     
     @IBAction func didChangedTime(_ sender: UISlider) {
-        timerValueLbl.text = String(format: "%.f min", sender.value)
-        originalTimaValue = Double(sender.value * 60)
+        var timeValue = Double(sender.value)
+        
+        if timeValue > 10 {
+            timeValue = timeValue.rounded(to: 5)
+        }
+        
+        timerValueLbl.text = String(format: "%.f min", timeValue)
+        originalTimaValue  = (timeValue * 60)
     }
     
     //MARK: - Internal methods -
@@ -101,5 +107,12 @@ class VideoPlayerControls: UIView {
         let sec = Int(leftTimeValue.truncatingRemainder(dividingBy: 60))
         
         leftTimeLbl.text = String(format: "Left time: %02d:%02d", min, sec)
+    }
+}
+
+extension FloatingPoint {
+    func rounded(to n: Int) -> Self {
+        return (self / Self(n)).rounded() * Self(n)
+        
     }
 }

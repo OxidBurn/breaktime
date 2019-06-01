@@ -28,17 +28,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="e7H-r2-27z">
-                    <rect key="frame" x="137.66666666666666" y="361" width="100" height="100"/>
+                    <rect key="frame" x="137" y="361" width="101" height="100"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sO-GP-F1m">
-                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                            <rect key="frame" x="0.0" y="0.0" width="101" height="100"/>
                             <state key="normal" image="play_btn_icon"/>
                             <connections>
                                 <action selector="didClickPlay:" destination="-1" eventType="touchUpInside" id="wy0-z7-oIg"/>
                             </connections>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l38-95-iVa">
-                            <rect key="frame" x="0.0" y="0.0" width="100" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="101" height="0.0"/>
                             <state key="normal" image="reset_btn_icon"/>
                             <connections>
                                 <action selector="didClickReset:" destination="-1" eventType="touchUpInside" id="Qfi-C5-6iw"/>
@@ -126,6 +126,6 @@
     </objects>
     <resources>
         <image name="play_btn_icon" width="100" height="100"/>
-        <image name="reset_btn_icon" width="100" height="100"/>
+        <image name="reset_btn_icon" width="101" height="101"/>
     </resources>
 </document>
