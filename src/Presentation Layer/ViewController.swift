@@ -48,10 +48,8 @@ class ViewController: UIViewController{
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            videoPlayer.player?.pause()
-            videoTimer?.invalidate()
+            suspendPlayerVideo()
             playerControls.pausePlayTimer()
-            updateVisibleStateOfCompoments()
             
             if playlistEnded {
                 videoPlayer.alpha = 1.0
@@ -112,11 +110,10 @@ class ViewController: UIViewController{
         UIView.animate(withDuration: 10.0,
                        animations: {
                         self.videoPlayer.alpha = 0.0
-        }) { (finished) in
-            self.videoPlayer.player?.pause()
-            self.videoPlayer.player?.seek(to: CMTime.zero)
-            self.playerIsHidden = true
-            self.updateVisibleStateOfCompoments()
+        }) { [weak self] (finished) in
+            self?.suspendPlayerVideo()
+            self?.videoPlayer.player?.seek(to: CMTime.zero)
+            self?.playerIsHidden = true
         }
     }
     
@@ -139,6 +136,12 @@ class ViewController: UIViewController{
                 timer.invalidate()
             }
         }
+    }
+    
+    func suspendPlayerVideo(){
+        videoTimer?.invalidate()
+        videoPlayer.player?.pause()
+        updateVisibleStateOfCompoments()
     }
 }
 
@@ -169,9 +172,8 @@ extension ViewController: TimerViewOutput {
 
 extension ViewController: AppStateServiceOutput {
     func didEnterToBackground() {
-        videoPlayer.player?.pause()
+        suspendPlayerVideo()
         playerControls.pausePlayTimer()
-        updateVisibleStateOfCompoments()
     }
 }
 
@@ -193,9 +195,7 @@ extension ViewController: VideoPlayerControlsOutput {
     }
     
     func didResetPlayer() {
-        videoTimer?.invalidate()
-        videoPlayer.player?.pause()
+        suspendPlayerVideo()
         videoPlayer.player?.seek(to: CMTime.zero)
-        updateVisibleStateOfCompoments()
     }
 }

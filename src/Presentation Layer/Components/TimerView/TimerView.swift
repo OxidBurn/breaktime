@@ -29,6 +29,7 @@ class TimerView: UIView {
     //MARK: - Input methods -
     func startTimer() {
         var timeCount = 10
+       
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             timeCount -= 1
             self.timeLabel.text = "\(timeCount)"
