@@ -27,14 +27,3 @@ extension ServerError : LocalizedError {
         }
     }
 }
-
-extension ServerError {
-    
-    init?(json : JSON) {
-        if let message = json["message"] as? String {
-            self = .custom(message)
-        } else {
-            self = .other
-        }
-    }
-}

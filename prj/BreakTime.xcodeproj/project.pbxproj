@@ -10,6 +10,8 @@
 		59244B53228B536C0000594E /* PlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59244B52228B536C0000594E /* PlaylistModel.swift */; };
 		59244B55228B53E70000594E /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59244B54228B53E70000594E /* ServerError.swift */; };
 		59244B58228B54170000594E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59244B57228B54170000594E /* Reachability.swift */; };
+		5943CCF3229FEF8900E02FB1 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943CCF2229FEF8900E02FB1 /* TimerView.swift */; };
+		5943CCF5229FEF9900E02FB1 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943CCF4229FEF9900E02FB1 /* TimerView.xib */; };
 		5960C2BA228BF34A0021AA39 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5960C2B9228BF34A0021AA39 /* AVFoundation.framework */; };
 		5960C2BD228BF4FD0021AA39 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5960C2BC228BF4FD0021AA39 /* VideoPlayerView.swift */; };
 		5960C2BF228BFC2C0021AA39 /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5960C2BE228BFC2C0021AA39 /* ErrorPresentable.swift */; };
@@ -22,6 +24,9 @@
 		596D3D582284B18D00A5A907 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596D3D572284B18D00A5A907 /* SettingsService.swift */; };
 		596D3D5B2284B1FE00A5A907 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596D3D5A2284B1FE00A5A907 /* Constants.swift */; };
 		59719EF4228582390045D78E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59719EF3228582390045D78E /* GoogleService-Info.plist */; };
+		598C006A22A266A2007BD951 /* AppStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C006922A266A2007BD951 /* AppStateService.swift */; };
+		598C006D22A26950007BD951 /* VideoPlayerControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C006C22A26950007BD951 /* VideoPlayerControls.swift */; };
+		598C006F22A2695B007BD951 /* VideoPlayerControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 598C006E22A2695B007BD951 /* VideoPlayerControls.xib */; };
 		8902324E9925E0D7AE291F81 /* Pods_BreakTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB2FD344154ADF2E48C5AF3F /* Pods_BreakTime.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +35,9 @@
 		59244B52228B536C0000594E /* PlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistModel.swift; sourceTree = "<group>"; };
 		59244B54228B53E70000594E /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		59244B57228B54170000594E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		5943CCF2229FEF8900E02FB1 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		5943CCF4229FEF9900E02FB1 /* TimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
+		5955CD78229D32AD002D22D6 /* -Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		5960C2B9228BF34A0021AA39 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5960C2BC228BF4FD0021AA39 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		5960C2BE228BFC2C0021AA39 /* ErrorPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
@@ -46,6 +54,9 @@
 		596D3D5F2284C58400A5A907 /* YoutubeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YoutubeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		596D3D612284C5A100A5A907 /* YoutubeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YoutubeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59719EF3228582390045D78E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		598C006922A266A2007BD951 /* AppStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateService.swift; sourceTree = "<group>"; };
+		598C006C22A26950007BD951 /* VideoPlayerControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerControls.swift; sourceTree = "<group>"; };
+		598C006E22A2695B007BD951 /* VideoPlayerControls.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerControls.xib; sourceTree = "<group>"; };
 		D9BEA0A0E405F3BBF9205C8C /* Pods-BreakTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakTime.release.xcconfig"; path = "Target Support Files/Pods-BreakTime/Pods-BreakTime.release.xcconfig"; sourceTree = "<group>"; };
 		FB2FD344154ADF2E48C5AF3F /* Pods_BreakTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -80,9 +91,27 @@
 			path = Server;
 			sourceTree = "<group>";
 		};
+		5943CCF0229FEE6700E02FB1 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		5943CCF1229FEF4B00E02FB1 /* TimerView */ = {
+			isa = PBXGroup;
+			children = (
+				5943CCF2229FEF8900E02FB1 /* TimerView.swift */,
+				5943CCF4229FEF9900E02FB1 /* TimerView.xib */,
+			);
+			path = TimerView;
+			sourceTree = "<group>";
+		};
 		5960C2BB228BF4E20021AA39 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				598C006B22A2693A007BD951 /* PlayerControls */,
+				5943CCF1229FEF4B00E02FB1 /* TimerView */,
 				5960C2BE228BFC2C0021AA39 /* ErrorPresentable.swift */,
 				5960C2BC228BF4FD0021AA39 /* VideoPlayerView.swift */,
 			);
@@ -125,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				596D3D40228369D100A5A907 /* Info.plist */,
+				5955CD78229D32AD002D22D6 /* -Bridging-Header.h */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -179,6 +209,8 @@
 		596D3D5122836A5D00A5A907 /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
+				598C006822A26692007BD951 /* AppState */,
+				5943CCF0229FEE6700E02FB1 /* Timer */,
 				59244B56228B54170000594E /* Server */,
 				596D3D562284B17100A5A907 /* AppSettings */,
 				596D3D5222843CF600A5A907 /* Youtube */,
@@ -216,6 +248,23 @@
 				59719EF3228582390045D78E /* GoogleService-Info.plist */,
 			);
 			path = Google;
+			sourceTree = "<group>";
+		};
+		598C006822A26692007BD951 /* AppState */ = {
+			isa = PBXGroup;
+			children = (
+				598C006922A266A2007BD951 /* AppStateService.swift */,
+			);
+			path = AppState;
+			sourceTree = "<group>";
+		};
+		598C006B22A2693A007BD951 /* PlayerControls */ = {
+			isa = PBXGroup;
+			children = (
+				598C006C22A26950007BD951 /* VideoPlayerControls.swift */,
+				598C006E22A2695B007BD951 /* VideoPlayerControls.xib */,
+			);
+			path = PlayerControls;
 			sourceTree = "<group>";
 		};
 		59CAF3EB2284C5C300D650B8 /* Libraries */ = {
@@ -307,6 +356,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				598C006F22A2695B007BD951 /* VideoPlayerControls.xib in Resources */,
+				5943CCF5229FEF9900E02FB1 /* TimerView.xib in Resources */,
 				596D3D48228369F700A5A907 /* LaunchScreen.storyboard in Resources */,
 				59719EF4228582390045D78E /* GoogleService-Info.plist in Resources */,
 				596D3D4A228369F700A5A907 /* Assets.xcassets in Resources */,
@@ -364,15 +415,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				596D3D5B2284B1FE00A5A907 /* Constants.swift in Sources */,
+				598C006D22A26950007BD951 /* VideoPlayerControls.swift in Sources */,
 				59244B53228B536C0000594E /* PlaylistModel.swift in Sources */,
 				596D3D582284B18D00A5A907 /* SettingsService.swift in Sources */,
 				596D3D5022836A4000A5A907 /* ViewController.swift in Sources */,
 				596D3D5422843D0700A5A907 /* YoutubeService.swift in Sources */,
 				5960C2BD228BF4FD0021AA39 /* VideoPlayerView.swift in Sources */,
+				5943CCF3229FEF8900E02FB1 /* TimerView.swift in Sources */,
 				596D3D4F22836A4000A5A907 /* AppDelegate.swift in Sources */,
 				59244B58228B54170000594E /* Reachability.swift in Sources */,
 				5960C2BF228BFC2C0021AA39 /* ErrorPresentable.swift in Sources */,
 				59244B55228B53E70000594E /* ServerError.swift in Sources */,
+				598C006A22A266A2007BD951 /* AppStateService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +581,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.guiltfree.breaktime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = OBDS_All_Apps;
+				SWIFT_OBJC_BRIDGING_HEADER = "-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -546,6 +601,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.guiltfree.breaktime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = breaktime;
+				SWIFT_OBJC_BRIDGING_HEADER = "-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

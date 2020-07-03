@@ -9,65 +9,137 @@
 import Foundation
 import SwiftyJSON
 
-struct PlaylistModel {
-    let kind, etag, nextPageToken: String?
-    let pageInfo: PageInfo?
-    let items: [Item]?
+struct PlaylistModel: Codable {
+    let kind, etag: String
+    let pageInfo: PageInfo
+    let items: [Item]
 }
 
-struct Item {
-    let kind, etag, id: String?
-    let contentDetails: ContentDetails?
+struct Item: Codable {
+    let kind, etag, id: String
+    let contentDetails: ContentDetails
 }
 
-struct ContentDetails {
-    let videoID, videoPublishedAt: String?
+struct ContentDetails: Codable {
+    let videoID, videoPublishedAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case videoID = "videoId"
+        case videoPublishedAt
+    }
 }
 
-struct PageInfo {
-    let totalResults, resultsPerPage: Int?
+struct PageInfo: Codable {
+    let totalResults, resultsPerPage: Int
 }
+
+// MARK: Convenience initializers
 
 extension PlaylistModel {
-    init?(json: Dictionary<String, Any>) {
-        
-        guard let kind = json["kind"] as? String else { return nil }
-        
-        self.kind = kind
-        self.etag = json["etag"] as? String
-        self.nextPageToken = json["nextPageToken"] as? String
-        self.pageInfo = PageInfo.init(json: json["pageInfo"] as! Dictionary<String, Any>)
-        
-        let itemsRaw = json["items"] as? [Dictionary<String, Any>]
-        self.items = itemsRaw?.compactMap(Item.init(json:))
+    init?(data: Data) {
+        guard let me = try? JSONDecoder().decode(PlaylistModel.self, from: data) else { return nil }
+        self = me
+    }
+
+    init?(_ json: String, using encoding: String.Encoding = .utf8) {
+        guard let data = json.data(using: encoding) else { return nil }
+        self.init(data: data)
+    }
+
+    init?(fromURL url: String) {
+        guard let url = URL(string: url) else { return nil }
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        self.init(data: data)
+    }
+
+    var jsonData: Data? {
+        return try? JSONEncoder().encode(self)
+    }
+
+    var json: String? {
+        guard let data = self.jsonData else { return nil }
+        return String(data: data, encoding: .utf8)
     }
 }
 
 extension Item {
-    init?(json: Dictionary<String, Any>) {
-        guard let kind = json["kind"] as? String else { return nil }
-        
-        self.kind = kind
-        self.etag = json["etag"] as? String
-        self.id   = json["id"] as? String
-        self.contentDetails = ContentDetails.init(json: json["contentDetails"] as! Dictionary<String, Any>)
+    init?(data: Data) {
+        guard let me = try? JSONDecoder().decode(Item.self, from: data) else { return nil }
+        self = me
+    }
+
+    init?(_ json: String, using encoding: String.Encoding = .utf8) {
+        guard let data = json.data(using: encoding) else { return nil }
+        self.init(data: data)
+    }
+
+    init?(fromURL url: String) {
+        guard let url = URL(string: url) else { return nil }
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        self.init(data: data)
+    }
+
+    var jsonData: Data? {
+        return try? JSONEncoder().encode(self)
+    }
+
+    var json: String? {
+        guard let data = self.jsonData else { return nil }
+        return String(data: data, encoding: .utf8)
     }
 }
 
 extension ContentDetails {
-    init?(json: Dictionary<String, Any>) {
-        guard let videoID = json["videoId"] as? String else { return nil }
-        
-        self.videoID = videoID
-        self.videoPublishedAt = json["videoPublishedAt"] as? String
+    init?(data: Data) {
+        guard let me = try? JSONDecoder().decode(ContentDetails.self, from: data) else { return nil }
+        self = me
+    }
+
+    init?(_ json: String, using encoding: String.Encoding = .utf8) {
+        guard let data = json.data(using: encoding) else { return nil }
+        self.init(data: data)
+    }
+
+    init?(fromURL url: String) {
+        guard let url = URL(string: url) else { return nil }
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        self.init(data: data)
+    }
+
+    var jsonData: Data? {
+        return try? JSONEncoder().encode(self)
+    }
+
+    var json: String? {
+        guard let data = self.jsonData else { return nil }
+        return String(data: data, encoding: .utf8)
     }
 }
 
 extension PageInfo {
-    init?(json: Dictionary<String, Any>) {
-        guard let totalResults = json["totalResults"] as? Int else { return nil }
-        
-        self.totalResults = totalResults
-        self.resultsPerPage = json["resultsPerPage"] as? Int
+    init?(data: Data) {
+        guard let me = try? JSONDecoder().decode(PageInfo.self, from: data) else { return nil }
+        self = me
+    }
+
+    init?(_ json: String, using encoding: String.Encoding = .utf8) {
+        guard let data = json.data(using: encoding) else { return nil }
+        self.init(data: data)
+    }
+
+    init?(fromURL url: String) {
+        guard let url = URL(string: url) else { return nil }
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        self.init(data: data)
+    }
+
+    var jsonData: Data? {
+        return try? JSONEncoder().encode(self)
+    }
+
+    var json: String? {
+        guard let data = self.jsonData else { return nil }
+        return String(data: data, encoding: .utf8)
     }
 }
+

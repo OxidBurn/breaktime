@@ -9,12 +9,25 @@
 import UIKit
 import SVProgressHUD
 import AVFoundation
+import MediaPlayer
+import AVKit
 
 class ViewController: UIViewController{
     
     @IBOutlet weak var videoPlayer: VideoPlayerView!
-    @IBOutlet weak var playBtn: UIButton!
-    @IBOutlet weak var tryBtn: UIButton!
+    @IBOutlet weak var timerView: TimerView!
+    @IBOutlet weak var playerControls: VideoPlayerControls!
+    
+    var videoTimer: Timer?
+    var playlistEnded: Bool = true
+    var playerIsHidden: Bool = false
+    var countOfItems: Int = 0
+    var currentItem: Int = 0
+    lazy var appState: AppStateService = {
+        let aS = AppStateServiceImp(with: self)
+        return aS
+    }()
+    
     
     private lazy var youtubeService: YoutubeService = {
         let service = YoutubeServiceImp(with: self as YoutubeServiceOutput)
@@ -22,69 +35,167 @@ class ViewController: UIViewController{
     }()
 
     //MARK: - Lifecycle method -
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    override func loadView() {
+        super.loadView()
+        
+        videoPlayer.output    = self
+        timerView.output      = self
+        playerControls.output = self
+        
+        appState.startMonitoring()
         loadVideoFromPlaylist()
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            videoPlayer.player?.pause()
-            playBtn.isHidden = false
+            suspendPlayerVideo()
+            playerControls.pausePlayTimer()
+            
+            if playlistEnded {
+                videoPlayer.alpha = 1.0
+                videoPlayer.player?.volume = 1.0
+            }
         }
     }
-    
-    
-    //MARK: - Actions -
-    
-    @IBAction func didClickPlay(_ sender: UIButton) {
-        sender.isHidden = true
-        videoPlayer.player?.play()
-    }
-    
-    @IBAction func didClickTryAgain(_ sender: UIButton) {
-        tryBtn.isHidden = true
-        loadVideoFromPlaylist()
-    }
-    
     
     //MARK: - Internal methods -
     func loadVideoFromPlaylist() {
         SVProgressHUD.show(withStatus: "Loading playlist...")
         
-        youtubeService.obtainFirstVideoURL { (videoURL, error) in
-            
-            if let err = error {
-                self.showError(with: err)
-            } else if let videoLink = videoURL as? String {
-                
-                self.startPlay(with: videoLink)
-                
-            } else {
-                self.showError(with: ServerError.custom("Bad video link"))
-            }
-            
+        youtubeService.obtainPlaylist { (player, error) in
             SVProgressHUD.dismiss()
+            guard let p = player else { self.showError(with: error!); return }
+            OperationQueue.main.addOperation({
+                self.initializePlay(with: p as! AVQueuePlayer)
+            })
         }
     }
     
-    func startPlay(with link: String) {
-        guard let linkURL = URL(string: link) else { return }
-        
-        let player = AVPlayer(url: linkURL)
+    func initializePlay(with player: AVQueuePlayer) {
+        countOfItems = player.items().count
         videoPlayer.player = player
-        playBtn.isHidden = false
+        updateVisibleStateOfCompoments()
+    }
+    
+    func startTimer(with timeValue: Double) {
+        videoTimer = Timer.scheduledTimer(withTimeInterval: timeValue, repeats: false, block: { timer in
+            timer.invalidate()
+            self.playlistEnded = true
+            self.displayCountdownTimer()
+        })
+    }
+    
+    func updateVisibleStateOfCompoments() {
+
+        if let status = videoPlayer.player?.timeControlStatus {
+            switch status {
+            case .paused:
+                if playlistEnded {
+                    playerControls.display(with: .defaultState)
+                } else {
+                    playerControls.display(with: .playingState)
+                }
+                playerControls.isHidden = false
+            case .playing, .waitingToPlayAtSpecifiedRate:
+                playerControls.isHidden = true
+            default:
+                print("Default video player status")
+            }
+        }
+    }
+    
+    func stopPlayingVideo() {
+        videoTimer?.invalidate()
+        fadeVideoVolume()
+        UIView.animate(withDuration: 10.0,
+                       animations: {
+                        self.videoPlayer.alpha = 0.0
+        }) { [weak self] (finished) in
+            self?.suspendPlayerVideo()
+            self?.videoPlayer.player?.seek(to: CMTime.zero)
+            self?.playerIsHidden = true
+        }
+    }
+    
+    func displayCountdownTimer() {
+        timerView.isHidden = false
+        timerView.startTimer()
+    }
+    
+    func resetPlayerViewState() {
+        videoPlayer.alpha = 1.0
+        videoPlayer.player?.volume = 1.0
+        playerIsHidden = false
+    }
+    
+    func fadeVideoVolume(){
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {[weak self] (timer) in
+            self?.videoPlayer.player?.volume -= 0.1
+            
+            if self?.videoPlayer.player?.volume == 0.0 {
+                timer.invalidate()
+            }
+        }
+    }
+    
+    func suspendPlayerVideo(){
+        videoTimer?.invalidate()
+        videoPlayer.player?.pause()
+        updateVisibleStateOfCompoments()
     }
 }
 
 extension ViewController: YoutubeServiceOutput, ErrorPresentable {
     //MARK: - Youtube service outout methods -
     func showError(with error: ServerError) {
-        
-        tryBtn.bringSubviewToFront(videoPlayer)
-        tryBtn.isHidden = false
-        
         present(error)
+        SVProgressHUD.dismiss()
+    }
+}
+
+extension ViewController: VideoPlayerViewOutput {
+    func videoPlayDidFinished() {
+        currentItem += 1
+        
+        if currentItem == countOfItems {
+            displayCountdownTimer()
+        }
+    }
+}
+
+extension ViewController: TimerViewOutput {
+    func didFinishedTimer() {
+        timerView.isHidden = true
+        stopPlayingVideo()
+    }
+}
+
+extension ViewController: AppStateServiceOutput {
+    func didEnterToBackground() {
+        suspendPlayerVideo()
+        playerControls.pausePlayTimer()
+    }
+}
+
+extension ViewController: VideoPlayerControlsOutput {
+    func didStartPlayer(with timeDelay: Double) {
+        if playerIsHidden {
+            resetPlayerViewState()
+        }
+        videoPlayer.player?.play()
+        playlistEnded = false
+        startTimer(with: timeDelay)
+        updateVisibleStateOfCompoments()
+    }
+    
+    func didResumePlayer(with leftTime: Double) {
+        startTimer(with: leftTime)
+        videoPlayer.player?.play()
+        updateVisibleStateOfCompoments()
+    }
+    
+    func didResetPlayer() {
+        suspendPlayerVideo()
+        videoPlayer.player?.seek(to: CMTime.zero)
     }
 }
